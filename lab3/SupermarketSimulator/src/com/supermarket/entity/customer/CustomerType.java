@@ -1,6 +1,6 @@
 package com.supermarket.entity.customer;
 
-public enum CustType {
+public enum CustomerType {
     CHILD,
     ADULT,
     RETIRED,

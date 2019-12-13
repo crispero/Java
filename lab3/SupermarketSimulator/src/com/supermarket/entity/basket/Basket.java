@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Basket {
-    private List<SupermarketProduct> products = new ArrayList<>();
+    private final List<SupermarketProduct> products = new ArrayList<>();
 
     public Basket() {}
 
@@ -18,9 +18,4 @@ public class Basket {
         products.add(product);
     }
 
-    public void removeProduct(SupermarketProduct product) {
-        if (products.size() > 0) {
-            products.remove(product);
-        }
-    }
 }

@@ -12,11 +12,6 @@ public class SupermarketProduct extends Product {
         this.quantity = quantity;
     }
 
-    public SupermarketProduct(Product product, int quantity) {
-        super(product.getName(), product.getPrice(), product.isAdultOnly(), product.getDiscount(), product.getType());
-        this.quantity = quantity;
-    }
-
     public int getQuantity() {
         return quantity;
     }

@@ -10,10 +10,10 @@ import java.util.List;
 
 public class Supermarket {
     private boolean isOpen;
-    private List<SupermarketProduct> products;
-    private List<Customer> customers = new ArrayList<>();
-    private CashDesk cashDesk;
-    private Report report;
+    private final List<SupermarketProduct> products;
+    private final List<Customer> customers = new ArrayList<>();
+    private final CashDesk cashDesk;
+    private final Report report;
 
     public Supermarket(List<SupermarketProduct> products) {
         this.products = products;
@@ -21,7 +21,7 @@ public class Supermarket {
         this.cashDesk = new CashDesk(this.report);
     }
 
-    public boolean isOpen() {
+    private boolean isOpen() {
         return isOpen;
     }
 
@@ -62,6 +62,35 @@ public class Supermarket {
         customers.add(customer);
     }
 
+    public void deleteCustomer(Customer customer) {
+        customers.remove(customer);
+    }
+
+    public void deleteAllCustomers() {
+        if (customers.size() > 0) {
+            customers.clear();
+        }
+    }
+
+    public void returnProducts() throws Exception {
+        for (Customer customer : customers) {
+            for (SupermarketProduct productInBasket : customer.getBasket().getProducts()) {
+                SupermarketProduct findProduct = findProduct(productInBasket);
+                findProduct.setQuantity(findProduct.getQuantity() + productInBasket.getQuantity());
+            }
+        }
+    }
+
+    private SupermarketProduct findProduct(SupermarketProduct product) throws Exception {
+        for (SupermarketProduct supermarketProduct : products) {
+            if (supermarketProduct.getName().equals(product.getName())) {
+                return supermarketProduct;
+            }
+        }
+
+        throw new Exception("Product not found");
+    }
+
     public Customer getCustomerByIndex(int index) {
         return customers.get(index);
     }
@@ -74,7 +103,7 @@ public class Supermarket {
         getCashDesk().addCustomer(customer);
     }
 
-    public Report getReport() {
+    private Report getReport() {
         return report;
     }
 

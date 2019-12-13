@@ -1,7 +1,6 @@
 package com.supermarket.logger;
 
-import com.supermarket.entity.customer.Customer;
-import com.supermarket.entity.product.Product;
+import com.supermarket.entity.paymentmethod.PaymentMethod;
 import com.supermarket.entity.product.SupermarketProduct;
 
 import java.math.BigDecimal;
@@ -43,6 +42,7 @@ public class Logger {
 
     public static void printProductInfo(SupermarketProduct product) {
         System.out.print("name: " + product.getName() + ", ");
+        System.out.print("price: " + product.getPrice() + ", ");
         System.out.println("quantity: " + product.getQuantity());
     }
 
@@ -58,8 +58,20 @@ public class Logger {
         System.out.println("Daily report: ");
     }
 
+    public static void printEmptyDailyReport() {
+        System.out.println("Daily report is empty");
+    }
+
     public static void printPurchaseInfoReport(SupermarketProduct product, BigDecimal cost) {
         System.out.println(product.getName() + " " + product.getQuantity() + " " + cost.toString());
+    }
+
+    public static void printCustomerAtCashDesk(Date date, String customerName, BigDecimal price) {
+        System.out.println(getCurrentDateTemplate(date) + "Customer '" + customerName + "' at the cash desk, amount to pay: " + price);
+    }
+
+    public static void printCustomerPaid(Date date, String customerName, BigDecimal price, PaymentMethod paymentMethod) {
+        System.out.println(getCurrentDateTemplate(date) + "Customer '" + customerName + "' paid: " + price + " by " + paymentMethod);
     }
 
     private static String getCurrentDateTemplate(Date date) {

@@ -8,17 +8,17 @@ import com.supermarket.entity.product.SupermarketProduct;
 import java.math.BigDecimal;
 
 public class Customer {
-    private String name;
-    private CustType customerType;
-    private Basket basket;
+    private final String name;
+    private final CustomerType customerType;
+    private final Basket basket;
     private BigDecimal money;
     private BigDecimal card;
     private BigDecimal bonus;
-    private PaymentMethod paymentMethod;
+    private final PaymentMethod paymentMethod;
 
     public Customer(
             String name,
-            CustType customerType,
+            CustomerType customerType,
             BigDecimal money,
             BigDecimal card,
             BigDecimal bonus,
@@ -37,7 +37,7 @@ public class Customer {
         return name;
     }
 
-    public CustType getCustomerType() {
+    public CustomerType getCustomerType() {
         return customerType;
     }
 
@@ -46,7 +46,7 @@ public class Customer {
     }
 
     public boolean canPutProductInBasket(SupermarketProduct product) {
-        return getCustomerType() != CustType.CHILD || !product.isAdultOnly();
+        return getCustomerType() != CustomerType.CHILD || !product.isAdultOnly();
     }
 
     public void putProductInBasket(SupermarketProduct product, int quantity) {
@@ -60,11 +60,11 @@ public class Customer {
         ));
     }
 
-    public BigDecimal getMoney() {
+    private BigDecimal getMoney() {
         return money;
     }
 
-    public BigDecimal getBonus() {
+    private BigDecimal getBonus() {
         return bonus;
     }
 
@@ -72,19 +72,19 @@ public class Customer {
         return paymentMethod;
     }
 
-    public BigDecimal getCard() {
+    private BigDecimal getCard() {
         return card;
     }
 
-    public void setCard(BigDecimal card) {
+    private void setCard(BigDecimal card) {
         this.card = card;
     }
 
-    public void setMoney(BigDecimal money) {
+    private void setMoney(BigDecimal money) {
         this.money = money;
     }
 
-    public void setBonus(BigDecimal bonus) {
+    private void setBonus(BigDecimal bonus) {
         this.bonus = bonus;
     }
 
@@ -104,11 +104,11 @@ public class Customer {
         BigDecimal price = bill.getPrice();
 
         if (getPaymentMethod() == PaymentMethod.CARD) {
-            checkToCompare(price, getCard());
+            return checkToCompare(price, getCard());
         } else if (getPaymentMethod() == PaymentMethod.CASH) {
-            checkToCompare(price, getMoney());
+            return checkToCompare(price, getMoney());
         } else if (getPaymentMethod() == PaymentMethod.BONUS) {
-            checkToCompare(price, getBonus());
+            return checkToCompare(price, getBonus());
         }
 
         return true;

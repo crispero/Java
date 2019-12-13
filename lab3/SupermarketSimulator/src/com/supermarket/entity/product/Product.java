@@ -5,13 +5,13 @@ import com.supermarket.entity.discount.Discount;
 import java.math.BigDecimal;
 
 public class Product {
-    private String name;
-    private BigDecimal price;
-    private boolean isAdultOnly;
-    private Discount discount;
-    private ProductType type;
+    private final String name;
+    private final BigDecimal price;
+    private final boolean isAdultOnly;
+    private final Discount discount;
+    private final ProductType type;
 
-    public Product(String name, BigDecimal price, boolean isAdultOnly, Discount discount, ProductType type) {
+    Product(String name, BigDecimal price, boolean isAdultOnly, Discount discount, ProductType type) {
         this.name = name;
         this.price = price;
         this.isAdultOnly = isAdultOnly;
